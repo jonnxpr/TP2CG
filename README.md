@@ -1,3 +1,3 @@
-TP2 Computação Gráfica - CEFETMG
-Aluno: Jonathan Douglas Diego Tavares
+TP2 Computação Gráfica - CEFETMG \n
+Aluno: Jonathan Douglas Diego Tavares \n
 Tema: Parque de diversões
