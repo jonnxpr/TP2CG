@@ -13,7 +13,8 @@
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-    glutInitWindowSize(1500, 955);
+    glutInitContextVersion(2, 1);
+    glutInitWindowSize(1360, 768);
     glutInitWindowPosition(0, 0);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
@@ -25,12 +26,11 @@ int main(int argc, char *argv[])
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     glutKeyboardUpFunc(keyboardUp);
-    glutTimerFunc(1000/60, atualizaCena, 0);
+    glutTimerFunc(33, atualizaCena, 33);
     glutMouseFunc(mouse);
     glutPassiveMotionFunc(posicionaCamera);
     glutSpecialFunc(specialInput);
 
     glutMainLoop();
-
     return 0;
 }

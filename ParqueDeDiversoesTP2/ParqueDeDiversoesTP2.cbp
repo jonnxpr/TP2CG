@@ -60,6 +60,8 @@
 		<Unit filename="glmint.h" />
 		<Unit filename="globalVariaveis.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="vetor.cpp" />
+		<Unit filename="vetor.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

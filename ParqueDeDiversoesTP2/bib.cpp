@@ -2,14 +2,13 @@
 #include "globalVariaveis.h"
 
 using namespace std;
-
 /**************************************************************
                 FUNCOES GLOBAIS GLM (IMPLEMENTACAO)
 **************************************************************/
 void drawmodelSky(){
 
     if(!skyModel){
-        skyModel = glmReadOBJ("assets/obj/TP2SkySphere/TP2Sphere.obj");
+        skyModel = glmReadOBJ("assets/obj/arvore/Tree/Tree.obj");
         glmScale(skyModel, 200.0);
         if(!skyModel)
             exit(0);
@@ -87,105 +86,17 @@ void despausar(){
     pause = false;
 }
 
-/**************************************************************
-                CLASS HUD (IMPLEMENTACAO)
-**************************************************************/
-HUD::HUD(int screenSizeX, int screenSizeY, int screenInitPositionX, int screenInitPositionY, int telaAtual){
-        this->screenSizeX = screenSizeX;
-        this->screenSizeY = screenSizeY;
-        this->screenInitPositionX = screenInitPositionX;
-        this->screenInitPositionY = screenInitPositionY;
-}
-
-int HUD::getScreenInitPositionX(){
-    return this->screenInitPositionX;
-}
-
-int HUD::getScreenInitPositionY(){
-    return this->screenInitPositionY;
-}
-
-int HUD::getScreenSizeX(){
-    return this->screenSizeX;
-}
-
-int HUD::getScreenSizeY(){
-    return this->screenSizeY;
-}
-
-int HUD::getTelaAtual(){
-    return this->telaAtual;
-}
-
-int HUD::getModoCamAtual(){
-    return this->modoCamAtual;
-}
-
-
-void HUD::escreveTexto(void * font, char *s, float x, float y, float z) {
-    int i;
-    glRasterPos3f(x, y, z);
-
-    for (i = 0; i < strlen(s); i++) {
-        glutBitmapCharacter(font, s[i]);
-    }
-}
-
-void HUD::mudaTela(Tela novaTela){
-    this->telaAtual = novaTela;
-}
-
-void HUD::showSplashScreen(){
-    glColor3f(0, 0, 0);
-    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "SplashScreen", 100, 100, 0);
-}
-
-void HUD::showMenu(){
-   glColor3f(0, 0, 0);
-   hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Menu", 100, 100, 0);
-}
-
-void HUD::showMenuCreditos(){
-    glColor3f(0, 0, 0);
-    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Creditos", 100, 100, 0);
-}
-
-void HUD::showMenuOpcoes(){
-    glColor3f(0, 0, 0);
-    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Opcoes", 100, 100, 0);
-}
-
-void HUD::showJogo(){
-    glPushMatrix();
-    //glTranslatef(0, -foco.y-25, 0);
-    glScalef(100, 100, 100);
-    drawmodelSky();
-
-    glPopMatrix();
-}
-
-
-void HUD::showTelaSaida() {
-    glColor3f(0, 0, 0);
-    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Saida", 100, 100, 0);
-}
-
-void HUD::setTelaAtual(int novaTela){
-    this->telaAtual = novaTela;
-}
-
-void HUD::setModoCamAtual(int modoCam){
-    this->modoCamAtual = modoCam;
-}
-
-
-void HUD::inicializaTexturas(){
-}
-
-
 /******************************************************************
                 IMPLEMENTACAO DAS FUNCOES GLOBAIS
 ******************************************************************/
+
+void atualizaDirecaoCamera() {
+    direcaoCamera = sub(&alvoCamera, &posicaoCamera);
+}
+
+void atualizaAlvoCamera() {
+    alvoCamera = add(&posicaoCamera, &direcaoCamera);
+}
 
 GLuint carregaTextura(const char* arquivo) {
     GLuint idTextura = SOIL_load_OGL_texture(
@@ -238,28 +149,70 @@ void redimensionar(int width, int height) {
         glLoadIdentity();
     }
     else if (hud.getTelaAtual() == 4){
-        glEnable(GL_DEPTH_TEST);                // Ativa o Z buffer
-        glViewport (0, 0, hud.getScreenSizeX(), hud.getScreenInitPositionY());
-        glMatrixMode (GL_PROJECTION);
+        glViewport(0, 0, hud.getScreenSizeX(), hud.getScreenSizeY());
+        glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(60.0, (float)hud.getScreenSizeX()/(float)hud.getScreenSizeY(), 0.2, 350.0);     //colocar fovy entre 45.0 e 60.0
-        glMatrixMode(GL_MODELVIEW);     //muda para matriz de modelo e visão
+        gluPerspective(60, ((float)hud.getScreenSizeX())/hud.getScreenSizeY(), 0.1, 4000.0);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
     }
 }
 
 void inicializa(){
     glClearColor(1, 1, 1, 0);
 
-    glEnable(GL_BLEND );
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     hud.inicializaTexturas();
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+}
+
+void inicializaJogo(){
+    glClearColor(1.0, 1.0, 1.0, 0.0);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glShadeModel(GL_FLAT);
+
+    vec4 luzAmbiente = {{{ 0.3, 0.3, 0.3, 1.0 }}};
+    vec4 luzDifusaEspecular = {{{ 1.0, 1.0, 1.0, 0.0 }}};
+    vec4 luzPosicao = {{{-1.0, -1.0, 0.0, 0.0 }}};
+    vec4 ambienteGlobal = {{{ 0.3, 0.3, 0.3, 1.0 }}};
+    glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente.v);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusaEspecular.v);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, luzDifusaEspecular.v);
+    glLightfv(GL_LIGHT0, GL_POSITION, luzPosicao.v);
+
+    glEnable(GL_LIGHT0);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambienteGlobal.v);
+
+    vec4 materialAmbienteDifusa = {{{0.42, 0.27, 0.07, 1.0}}};
+    vec4 materialEspecular = {{{ 0.1, 0.1, 0.1, 1.0 }}};
+    float materialExpoente = 20.0;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, materialAmbienteDifusa.v);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, materialEspecular.v);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, materialExpoente);
+
+    // configura a posição e alvo inicial da câmera
+    posicaoCamera.x = 0;
+    posicaoCamera.y = 5;
+    posicaoCamera.z = 30;
+    alvoCamera.x = 0;
+    alvoCamera.y = 0;
+    alvoCamera.z = 0;
+    atualizaDirecaoCamera();
+
+    up.x = 0;
+    up.y = 1;
+    up.z = 0;
 }
 
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3f (1, 1, 1);
+    //glColor3f (1, 1, 1);
 
     switch(hud.getTelaAtual()){
     case 0:
@@ -288,6 +241,7 @@ void display(){
 }
 
 void keyboard(unsigned char key, int x, int y){
+    keys[key] = TRUE;
     switch(key){
     case 27:
         if (hud.getTelaAtual() == hud.TELA_SAIDA){
@@ -304,32 +258,246 @@ void keyboard(unsigned char key, int x, int y){
                 hud.setTelaAtual(hud.MENU);
         }
         break;
+    case 'o':
+        if (hud.getTelaAtual() == hud.MENU){
+            hud.setTelaAtual(hud.MENU_OPCOES);
+        }
+        break;
     case 'j':
         if (hud.getTelaAtual() == hud.MENU){
             hud.setTelaAtual(hud.JOGO);
+            inicializaJogo();
         }
         break;
+    case 'c':
+    case 'C':
+        posicaoCamera.x = 0;
+        posicaoCamera.y = 30;
+        posicaoCamera.z = 0;
+        alvoCamera.x = 0;
+        alvoCamera.y = 0;
+        alvoCamera.z = 0;
+        direcaoCamera.x = 0;
+        direcaoCamera.y = -1;
+        direcaoCamera.z = 0.5f;
+        atualizaAlvoCamera();
     default:
         break;
     }
+    //glutReshapeWindow(hud.getScreenSizeX(), hud.getScreenSizeY());
     glutPostRedisplay();
 }
 
 void keyboardUp(unsigned char key, int x, int y){
-    glutPostRedisplay();
+    keys[key] = FALSE;
 }
 
 void specialInput(int key, int x, int y) {
 }
 
 void atualizaCena(int periodo){
-    glutPostRedisplay();
+    vec3 deslocamento;
+    vec3 temp1, temp2;
 
-    glutTimerFunc(1000/60, atualizaCena, 0);
+    if (keys['w'] || keys['W']) {
+        temp1 = normalize(&direcaoCamera);
+        posicaoCamera = add(&posicaoCamera, &temp1);
+        atualizaAlvoCamera();
+    } else if (keys['s'] || keys['S']) {
+        temp1 = normalize(&direcaoCamera);
+        posicaoCamera = sub(&posicaoCamera, &temp1);
+        atualizaAlvoCamera();
+    }
+
+    if (keys['d'] || keys['D']) {
+        temp1 = cross(&direcaoCamera, &up);
+        deslocamento = normalize(&temp1);
+        temp2 = mult(&deslocamento, 1);
+        direcaoCamera = add(&direcaoCamera, &temp2);
+        atualizaAlvoCamera();
+    } else if (keys['a'] || keys['A']) {
+        temp1 = cross(&direcaoCamera, &up);
+        deslocamento = normalize(&temp1);
+        temp2 = mult(&deslocamento, 1);
+        direcaoCamera = sub(&direcaoCamera, &temp2);
+        atualizaAlvoCamera();
+    }
+
+    glutPostRedisplay();
+    glutTimerFunc(periodo, atualizaCena, periodo);
 }
 
 void posicionaCamera(int x, int y) {
 
     glutPostRedisplay();
+}
+
+/**************************************************************
+                CLASS HUD (IMPLEMENTACAO)
+**************************************************************/
+HUD::HUD(int screenSizeX, int screenSizeY, int screenInitPositionX, int screenInitPositionY, int telaAtual){
+        this->screenSizeX = screenSizeX;
+        this->screenSizeY = screenSizeY;
+        this->screenInitPositionX = screenInitPositionX;
+        this->screenInitPositionY = screenInitPositionY;
+}
+
+int HUD::getScreenInitPositionX(){
+    return this->screenInitPositionX;
+}
+
+int HUD::getScreenInitPositionY(){
+    return this->screenInitPositionY;
+}
+
+int HUD::getScreenSizeX(){
+    return this->screenSizeX;
+}
+
+int HUD::getScreenSizeY(){
+    return this->screenSizeY;
+}
+
+int HUD::getTelaAtual(){
+    return this->telaAtual;
+}
+
+int HUD::getModoCamAtual(){
+    return this->modoCamAtual;
+}
+
+
+void HUD::escreveTexto(void * font, char *s, float x, float y, float z) {
+    int i;
+    glRasterPos3f(x, y, z);
+
+    for (i = 0; i < strlen(s); i++) {
+        glutBitmapCharacter(font, s[i]);
+    }
+}
+
+void HUD::mudaTela(Tela novaTela){
+    this->telaAtual = novaTela;
+}
+
+void HUD::showSplashScreen(){
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_NORMALIZE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_LIGHT0);
+    glColor3f(0, 0, 0);
+    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "SplashScreen", 100, 100, 0);
+}
+
+void HUD::showMenu(){
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_NORMALIZE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_LIGHT0);
+    glColor3f(0, 0, 0);
+    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Menu", 100, 100, 0);
+}
+
+void HUD::showMenuCreditos(){
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_NORMALIZE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_LIGHT0);
+    glColor3f(0, 0, 0);
+    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Creditos", 100, 100, 0);
+}
+
+void HUD::showMenuOpcoes(){
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_NORMALIZE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_LIGHT0);
+    glColor3f(0, 0, 0);
+    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Opcoes", 100, 100, 0);
+}
+
+void HUD::showJogo(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glLoadIdentity();
+    gluLookAt(posicaoCamera.x, posicaoCamera.y, posicaoCamera.z,
+              alvoCamera.x, alvoCamera.y, alvoCamera.z,
+              0.0, 1.0, 0.0);
+    printf("%f %f %f\n", posicaoCamera.x, posicaoCamera.y, posicaoCamera.z);
+
+    glPushMatrix();
+    glTranslatef(500, 500, 0);
+    glScalef(100, 100, 100);
+    drawmodelSky();
+
+    glPopMatrix();
+}
+
+void HUD::showTelaSaida() {
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_NORMALIZE);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_LIGHT0);
+    glColor3f(0, 0, 0);
+    hud.escreveTexto(GLUT_BITMAP_TIMES_ROMAN_24, "Saida", 100, 100, 0);
+}
+
+void HUD::setTelaAtual(int novaTela){
+    this->telaAtual = novaTela;
+}
+
+void HUD::setModoCamAtual(int modoCam){
+    this->modoCamAtual = modoCam;
+}
+
+void HUD::inicializaTexturas(){
+}
+
+/**************************************************************
+                 CLASS COORDENADA (IMPLEMENTACAO)
+**************************************************************/
+int Coordenada::getX(){
+    return this->x;
+}
+
+int Coordenada::getY(){
+    return this->y;
+}
+
+int Coordenada::getZ(){
+    return this->z;
+}
+
+int Coordenada::getAltura(){
+    return this->altura;
+}
+
+int Coordenada::getLargura(){
+    return this->largura;
+}
+
+void Coordenada::setX(int x){
+    this->x = x;
+}
+
+void Coordenada::setY(int y){
+    this->y = y;
+}
+
+void Coordenada::setZ(int y){
+    this->z = z;
+}
+
+void Coordenada::setAltura(int altura){
+    this->altura = altura;
+}
+
+void Coordenada::setLargura(int largura){
+    this->largura = largura;
 }
 

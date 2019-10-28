@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1572125095 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\main.cpp
+1572241411 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\main.cpp
 	"bib.h"
 
 1426360528 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h
@@ -280,11 +280,12 @@
 
 1215465208 c:\program files (x86)\codeblocks\mingw\include\soil\soil.h
 
-1572132092 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\bib.cpp
+1572242639 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\bib.cpp
 	"bib.h"
 	"globalVariaveis.h"
 
-1572131616 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\bib.h
+1572242254 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\bib.h
+	<cstdio>
 	<iostream>
 	<cmath>
 	<cstdlib>
@@ -295,6 +296,7 @@
 	"SDL/SDL_mixer.h"
 	"glm.h"
 	"glmint.h"
+	"vetor.h"
 
 1501501581 c:\program files (x86)\codeblocks\mingw\include\gl\glew.h
 	<stddef.h>
@@ -541,7 +543,7 @@
 1325735040 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_types.h
 	"SDL_stdinc.h"
 
-1572131217 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\globalvariaveis.h
+1572241374 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\globalvariaveis.h
 	"bib.h"
 
 1539227486 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\glm_util.cpp
@@ -611,4 +613,256 @@
 	<assert.h>
 	"glm.h"
 	"glmint.h"
+
+1571945576 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\vetor.h
+
+1571945576 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\vetor.cpp
+	<math.h>
+	"vetor.h"
+	<stdio.h>
+
+1572239827 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\funcglobal.h
+	"util.h"
+
+1572239400 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\classes.cpp
+	"util.h"
+
+1572239828 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\classes.h
+	"util.h"
+
+1572239799 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\funcglobal.cpp
+	"funcGlobal.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326107387 c:\program files (x86)\codeblocks\mingw\include\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_platform.h
+
+1326107394 c:\program files (x86)\codeblocks\mingw\include\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326107400 c:\program files (x86)\codeblocks\mingw\include\begin_code.h
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\close_code.h
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_keysym.h
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325735039 c:\program files (x86)\codeblocks\mingw\include\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1426360528 c:\program files (x86)\codeblocks\mingw\include\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1426360528 c:\program files (x86)\codeblocks\mingw\include\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426360528 c:\program files (x86)\codeblocks\mingw\include\freeglut_ext.h
+	<stdarg.h>
+
+1501501581 c:\program files (x86)\codeblocks\mingw\include\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1572240878 d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\util.h
+	<GL/glew.h>
+	<GL/freeglut.h>
+	"globalVariaveis.h"
+	"SDL/SDL.h"
+	"SDL/SDL_mixer.h"
+	"SOIL/SOIL.h"
+	<cstdio>
+	<iostream>
+	"glm.h"
+	"glmint.h"
+	"vetor.h"
+
+1572239398 source:d:\material cefet\computacaografica\tps\tp2\tp2cg\parquedediversoestp2\globalvariaveis.cpp
+	"util.h"
 

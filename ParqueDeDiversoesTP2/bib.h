@@ -1,6 +1,10 @@
 #ifndef BIB_H_INCLUDED
 #define BIB_H_INCLUDED
 
+#define TRUE 1
+#define FALSE 0
+
+#include <cstdio>
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
@@ -11,6 +15,9 @@
 #include "SDL/SDL_mixer.h"
 #include "glm.h"
 #include "glmint.h"
+#include "vetor.h"
+
+using namespace std;
 
 /**************************************************************
 Biblioteca de Classes e Funções para o Game Parque de Diversões.
@@ -21,21 +28,6 @@ Versão: 1.0 Alpha
 **************************************************************/
 
 using namespace std;
-
-/**************************************************************
-                Prototipos das Funcoes Globais
-**************************************************************/
-void inicializa();
-void redimensionar(int width, int height);
-void display();
-void keyboard(unsigned char key, int x, int y);
-void keyboardUp(unsigned char key, int x, int y);
-void atualizaCena(int periodo);
-void mouse(int button, int state, int x, int y);
-void posicionaCamera(int x, int y);
-void specialInput(int key, int x, int y);
-GLuint carregaTextura(const char* arquivo);
-void drawmodelSky();
 
 /**************************************************************
                         CLASS HUD
@@ -82,13 +74,34 @@ public:
     int getZ();
     int getAltura();
     int getLargura();
-    void setX();
-    void setY();
-    void setZ();
-    void setAltura();
-    void setLargura();
+    void setX(int x);
+    void setY(int y);
+    void setZ(int y);
+    void setAltura(int altura);
+    void setLargura(int largura);
 protected:
     int x, y, z;
     int altura, largura;
 };
+
+/**************************************************************
+                Prototipos das Funcoes Globais
+**************************************************************/
+void inicializa();
+void inicializaJogo();
+void redimensionar(int width, int height);
+void display();
+void keyboard(unsigned char key, int x, int y);
+void keyboardUp(unsigned char key, int x, int y);
+void atualizaCena(int periodo);
+void mouse(int button, int state, int x, int y);
+void posicionaCamera(int x, int y);
+void specialInput(int key, int x, int y);
+GLuint carregaTextura(const char* arquivo);
+void drawmodelSky();
+void atualizaDirecaoCamera();
+
+void atualizaAlvoCamera();
+
+
 #endif // BIB_H_INCLUDED
